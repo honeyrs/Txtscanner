@@ -89,9 +89,5 @@ async def main():
 if __name__ == '__main__':
     import asyncio
 
-    # If an event loop is already running, just use asyncio.create_task to schedule the coroutine
-    try:
-        asyncio.get_event_loop().create_task(main())
-    except RuntimeError:
-        # If no event loop is running, use asyncio.run()
-        asyncio.run(main())
+    # Use asyncio.run() to start the event loop and run the async main function
+    asyncio.run(main())
