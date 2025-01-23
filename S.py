@@ -1,7 +1,8 @@
 import time
 import requests
 from telegram import Update
-from telegram.ext import Application, CommandHandler, MessageHandler, filters, CallbackContext
+from telegram.ext import Updater, CommandHandler, MessageHandler, filters, CallbackContext
+from telegram.ext import CallbackContext, CommandHandler, MessageHandler
 
 # Your Bot's API key
 API_KEY = "8152265435:AAH9ex75KOmXl6lb_M79EAQgUvnPjbfkYUA"
@@ -71,20 +72,23 @@ def handle_file(update: Update, context: CallbackContext):
 def start(update: Update, context: CallbackContext):
     update.message.reply_text('Hello! Send me a .txt file and I will scan it for viruses.')
 
-async def main():
-    # Create an Application object (updater is replaced with Application in v20+)
-    application = Application.builder().token(API_KEY).build()
+def main():
+    # Create an Updater object
+    updater = Updater(API_KEY, use_context=True)
+
+    # Get the dispatcher
+    dispatcher = updater.dispatcher
 
     # Add command handler for /start and /txt
-    application.add_handler(CommandHandler('start', start))
-    application.add_handler(CommandHandler('txt', txt_command))
+    dispatcher.add_handler(CommandHandler('start', start))
+    dispatcher.add_handler(CommandHandler('txt', txt_command))
 
     # Add message handler for handling file uploads
-    application.add_handler(MessageHandler(filters.Document.MimeType("text/plain"), handle_file))
+    dispatcher.add_handler(MessageHandler(Filters.document.mime_type("text/plain"), handle_file))
 
     # Start the bot
-    await application.run_polling()
+    updater.start_polling()
+    updater.idle()
 
 if __name__ == '__main__':
-    import asyncio
-    asyncio.run(main())
+    main()
