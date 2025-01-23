@@ -5,6 +5,7 @@ from telegram.ext import Application, CommandHandler, MessageHandler, filters, C
 
 # Your Bot's API key
 API_KEY = "8152265435:AAH9ex75KOmXl6lb_M79EAQgUvnPjbfkYUA"
+
 # VirusTotal API key (you need to sign up on VirusTotal for a free key)
 VIRUSTOTAL_API_KEY = "f8c0a52b07f142927c575dee61a7ec981bdc5e4ed88d17d123aaa0c56ae0b529"
 
@@ -89,9 +90,9 @@ async def main():
 if __name__ == '__main__':
     import asyncio
 
-    # Check if there is already a running event loop
+    # If an event loop is already running, just use asyncio.create_task to schedule the coroutine
     try:
-        asyncio.get_event_loop().run_until_complete(main())  # Try to use the current event loop
+        asyncio.get_event_loop().create_task(main())
     except RuntimeError:
-        # If no event loop is running, create and run a new one
+        # If no event loop is running, use asyncio.run()
         asyncio.run(main())
