@@ -7,7 +7,7 @@ from telegram.ext import CallbackContext, CommandHandler, MessageHandler
 # Your Bot's API key
 API_KEY = "8152265435:AAH9ex75KOmXl6lb_M79EAQgUvnPjbfkYUA"
 # VirusTotal API key (you need to sign up on VirusTotal for a free key)
-VIRUSTOTAL_API_KEY = "your_virustotal_api_key_here"
+VIRUSTOTAL_API_KEY = "f8c0a52b07f142927c575dee61a7ec981bdc5e4ed88d17d123aaa0c56ae0b529"
 
 # Function to check a file with VirusTotal
 def scan_file(file_path: str):
