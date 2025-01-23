@@ -87,9 +87,11 @@ async def main():
     await application.run_polling()
 
 if __name__ == '__main__':
-    # Directly call `await main()` if an event loop is already running
     import asyncio
-    if not asyncio.get_event_loop().is_running():
+
+    # If an event loop is already running, just use asyncio.create_task to schedule the coroutine
+    try:
+        asyncio.get_event_loop().create_task(main())
+    except RuntimeError:
+        # If no event loop is running, use asyncio.run()
         asyncio.run(main())
-    else:
-        asyncio.create_task(main())  # This will schedule the task to run in the existing event loop
