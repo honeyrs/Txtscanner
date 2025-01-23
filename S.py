@@ -84,7 +84,7 @@ def main():
     dispatcher.add_handler(CommandHandler('txt', txt_command))
 
     # Add message handler for handling file uploads
-    dispatcher.add_handler(MessageHandler(Filters.document.mime_type("text/plain"), handle_file))
+    dispatcher.add_handler(MessageHandler(filters.document.mime_type("text/plain"), handle_file))
 
     # Start the bot
     updater.start_polling()
