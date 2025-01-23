@@ -71,6 +71,7 @@ def handle_file(update: Update, context: CallbackContext):
 def start(update: Update, context: CallbackContext):
     update.message.reply_text('Hello! Send me a .txt file and I will scan it for viruses.')
 
+# Function to run the bot
 async def main():
     # Create an Application object (use Application instead of Updater in v20+)
     application = Application.builder().token(API_KEY).build()
@@ -86,5 +87,6 @@ async def main():
     await application.run_polling()
 
 if __name__ == '__main__':
+    # No need to use asyncio.run, just directly call main()
     import asyncio
     asyncio.run(main())
